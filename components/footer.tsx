@@ -11,7 +11,7 @@ export default function Footer() {
           <p className="text-xs text-muted-foreground">Powered by Perplexity Sonar API</p>
         </div>
         <div className="text-xs text-muted-foreground text-center">
-          © {new Date().getFullYear()} Microbiome Mentor. All rights reserved.
+          © {new Date().getFullYear()} Gut Decode. All rights reserved.
         </div>
       </div>
     </footer>

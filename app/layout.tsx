@@ -13,7 +13,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Microbiome Mentor",
+  title: "Gut Decode",
   description: "Understand how foods and ingredients affect your gut health with AI-synthesized research summaries.",
   icons: {
     icon: "/images/microbiome-logo.png",

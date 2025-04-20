@@ -7,9 +7,7 @@ export default function AboutPage() {
     <div className="container px-4 py-8 md:px-6 md:py-12">
       <div className="mx-auto max-w-[800px] space-y-8">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tighter text-teal-800">
-            About Microbiome Mentor & Important Disclaimer
-          </h1>
+          <h1 className="text-3xl font-bold tracking-tighter text-teal-800">About Gut Decode & Important Disclaimer</h1>
           <p className="text-muted-foreground">Understanding our tool and its limitations</p>
         </div>
 
@@ -17,12 +15,12 @@ export default function AboutPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-semibold text-slate-800">
               <InfoIcon className="inline-block mr-2 h-5 w-5 text-teal-600" />
-              What is Microbiome Mentor?
+              What is Gut Decode?
             </h2>
             <p>
-              Microbiome Mentor is a tool designed to provide AI-synthesized summaries of scientific information
-              regarding food, ingredients, and gut health. Our goal is to make complex scientific research more
-              accessible and help you understand how different foods might affect your gut microbiome.
+              Gut Decode is a tool designed to provide AI-synthesized summaries of scientific information regarding
+              food, ingredients, and gut health. Our goal is to make complex scientific research more accessible and
+              help you understand how different foods might affect your gut microbiome.
             </p>
           </section>
 
@@ -34,8 +32,8 @@ export default function AboutPage() {
               How It Works
             </h2>
             <p>
-              Microbiome Mentor uses the Perplexity Sonar API to search and synthesize data from scientific literature
-              and reputable sources. When you enter a query about a food or ingredient, our system:
+              Gut Decode uses the Perplexity Sonar API to search and synthesize data from scientific literature and
+              reputable sources. When you enter a query about a food or ingredient, our system:
             </p>
             <ol className="list-decimal list-inside space-y-2 ml-4">
               <li>Searches through scientific databases and reputable health resources</li>
@@ -84,7 +82,7 @@ export default function AboutPage() {
                 <strong>This tool provides informational summaries only.</strong>
               </p>
               <p>
-                Microbiome Mentor is <strong>NOT</strong> a substitute for professional medical advice, diagnosis, or
+                Gut Decode is <strong>NOT</strong> a substitute for professional medical advice, diagnosis, or
                 treatment. The information provided should be considered educational in nature.
               </p>
               <p>

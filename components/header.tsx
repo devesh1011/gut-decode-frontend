@@ -13,7 +13,7 @@ export default function Header() {
             height={36}
             className="h-9 w-9"
           />
-          <span className="text-xl font-semibold text-teal-700">Microbiome Mentor</span>
+          <span className="text-xl font-semibold text-teal-700">Gut Decode</span>
         </Link>
         <nav className="flex gap-4">
           <Link
