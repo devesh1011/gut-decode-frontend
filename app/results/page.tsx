@@ -5,8 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { AlertCircleIcon, CheckCircleIcon, FileTextIcon, InfoIcon, LeafIcon } from "lucide-react"
-import SearchForm from "@/components/search-form"
-import FollowUpForm from "@/components/follow-up-form"
+import QueryInput from "@/components/query-input"
 import ResultsSkeleton from "@/components/results-skeleton"
 import { getGutHealthInfo } from "@/lib/gut-health-api"
 
@@ -26,7 +25,7 @@ export default async function ResultsPage({
     <div className="container px-4 py-8 md:px-6 md:py-12">
       <div className="mx-auto max-w-[900px]">
         <div className="mb-8">
-          <SearchForm initialQuery={query} />
+          <QueryInput showFollowUpButton={true} />
         </div>
 
         <Suspense fallback={<ResultsSkeleton />}>
@@ -161,12 +160,6 @@ async function ResultsContent({
           ))}
         </div>
       </div>
-
-      {/* Follow-up Form */}
-      <Card className="p-6 mt-8 bg-slate-50">
-        <h3 className="text-lg font-medium text-slate-800 mb-4">Ask a follow-up question</h3>
-        <FollowUpForm query={query} />
-      </Card>
     </div>
   )
 }

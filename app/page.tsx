@@ -1,6 +1,6 @@
 import { BrainCircuitIcon, DatabaseIcon, SearchIcon } from "lucide-react"
 import Link from "next/link"
-import SearchForm from "@/components/search-form"
+import QueryInput from "@/components/query-input"
 
 export default function HomePage() {
   return (
@@ -25,7 +25,7 @@ export default function HomePage() {
       <section className="py-12 md:py-16">
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-[800px]">
-            <SearchForm />
+            <QueryInput showFollowUpButton={false} />
 
             {/* Example Queries */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
