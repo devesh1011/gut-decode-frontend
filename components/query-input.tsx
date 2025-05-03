@@ -11,29 +11,38 @@ interface QueryInputProps {
   initialQuery?: string
   showFollowUpButton?: boolean
   onSubmit?: (query: string, isFollowUp: boolean) => void
+  isLoading?: boolean
 }
 
-export default function QueryInput({ initialQuery = "", showFollowUpButton = false, onSubmit }: QueryInputProps) {
+export default function QueryInput({
+  initialQuery = "",
+  showFollowUpButton = false,
+  onSubmit,
+  isLoading: externalLoading,
+}: QueryInputProps) {
   const [query, setQuery] = useState(initialQuery)
   const [isFocused, setIsFocused] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isInternalLoading, setIsInternalLoading] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
 
+  // Use external loading state if provided, otherwise use internal
+  const isLoading = externalLoading !== undefined ? externalLoading : isInternalLoading
+
   useEffect(() => {
-    setIsLoading(false)
+    setIsInternalLoading(false)
   }, [searchParams])
 
   const handleSubmit = (e: React.FormEvent, isFollowUp = false) => {
     e.preventDefault()
-    if (!query.trim()) return
+    if (!query.trim() || isLoading) return
 
     if (onSubmit) {
       onSubmit(query.trim(), isFollowUp)
       return
     }
 
-    setIsLoading(true)
+    setIsInternalLoading(true)
 
     if (isFollowUp && searchParams.get("query")) {
       router.push(
@@ -57,6 +66,7 @@ export default function QueryInput({ initialQuery = "", showFollowUpButton = fal
             onBlur={() => setIsFocused(false)}
             className="w-full bg-transparent text-white py-3 px-2 outline-none"
             placeholder={isFocused ? "" : "Enter food, ingredient, or gut health question..."}
+            disabled={isLoading}
           />
           {isFocused && query === "" && (
             <span className="absolute text-xs text-zinc-400 left-2 top-1">

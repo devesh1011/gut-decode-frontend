@@ -1,8 +1,17 @@
+"use client"
+
 import { BrainCircuitIcon, DatabaseIcon, SearchIcon } from "lucide-react"
 import Link from "next/link"
 import QueryInput from "@/components/query-input"
+import { useRouter } from "next/navigation"
 
 export default function HomePage() {
+  const router = useRouter()
+
+  const handleSubmit = (query: string) => {
+    router.push(`/results?query=${encodeURIComponent(query)}`)
+  }
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -25,7 +34,7 @@ export default function HomePage() {
       <section className="py-12 md:py-16">
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-[800px]">
-            <QueryInput showFollowUpButton={false} />
+            <QueryInput showFollowUpButton={false} onSubmit={handleSubmit} />
 
             {/* Example Queries */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
