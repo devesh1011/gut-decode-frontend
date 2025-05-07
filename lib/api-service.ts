@@ -37,6 +37,9 @@ const MOCK_RESPONSE: ApiResponse = [
   ],
 ]
 
+// Get the API URL from environment variables, fallback to localhost for development
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
+
 export async function analyzeQuery(query: string, followup?: string, useMockData = false): Promise<ApiResponse> {
   // For development/testing - return mock data if requested
   if (useMockData) {
@@ -48,33 +51,47 @@ export async function analyzeQuery(query: string, followup?: string, useMockData
   try {
     console.log("Making API request with query:", query, followup ? `and followup: ${followup}` : "")
 
-    const url = "http://127.0.0.1:8000/api/v1/analyze";
+    const url = `${API_URL}/api/v1/analyze`;
 
     const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Add CORS headers if needed
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            query: followup ? `${query} ${followup}` : query,
-          }),
-          // Add credentials if needed
-          // credentials: 'include',
-        })
-
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        // Add CORS headers
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        query: followup ? `${query} ${followup}` : query,
+      }),
+      // Enable credentials if needed
+      credentials: "include",
+    })
     
     if (!response.ok) {
-      const errorText = await response.text()
-      console.error(`API error (${response.status}):`, errorText)
-      throw new Error(`API request failed with status ${response.status}: ${errorText}`)
+      let errorMessage
+      try {
+        const errorData = await response.json()
+        errorMessage = errorData.detail || errorData.message || `API request failed with status ${response.status}`
+      } catch {
+        const errorText = await response.text()
+        errorMessage = `API request failed with status ${response.status}: ${errorText}`
+      }
+      console.error("API error:", errorMessage)
+      throw new Error(errorMessage)
     }
 
     const data = await response.json()
+    
+    // Validate response structure
+    if (!Array.isArray(data) || data.length !== 2 || 
+        !data[0]?.summary || !data[0]?.impacts || !Array.isArray(data[1])) {
+      console.error("Invalid API response structure:", data)
+      throw new Error("Invalid API response format")
+    }
+    
     console.log("API response data:", data)
-
-    return data;
+    return data as ApiResponse
   } catch (error) {
     console.error("Error analyzing query:", error)
     // Fall back to mock data
