@@ -58,14 +58,10 @@ export async function analyzeQuery(query: string, followup?: string, useMockData
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        // Add CORS headers
-        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
         query: followup ? `${query} ${followup}` : query,
       }),
-      // Enable credentials if needed
-      credentials: "include",
     })
     
     if (!response.ok) {
@@ -82,19 +78,10 @@ export async function analyzeQuery(query: string, followup?: string, useMockData
     }
 
     const data = await response.json()
-    
-    // Validate response structure
-    if (!Array.isArray(data) || data.length !== 2 || 
-        !data[0]?.summary || !data[0]?.impacts || !Array.isArray(data[1])) {
-      console.error("Invalid API response structure:", data)
-      throw new Error("Invalid API response format")
-    }
-    
     console.log("API response data:", data)
     return data as ApiResponse
   } catch (error) {
     console.error("Error analyzing query:", error)
-    // Fall back to mock data
-    return MOCK_RESPONSE
+    throw error // Don't fall back to mock data, let the UI handle the error
   }
 }
