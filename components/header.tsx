@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function Header() {
   return (
-    <header className="border-b bg-white">
+    <header className="border-b bg-white sticky top-0 z-50 shadow-sm">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Image
