@@ -26,7 +26,7 @@ export default function SearchForm({ initialQuery = "", showFollowUpButton = fal
     setIsFollowUpLoading(false)
   }, [searchParams])
 
-  const handleDeepDive = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!query.trim()) return
 
@@ -46,7 +46,7 @@ export default function SearchForm({ initialQuery = "", showFollowUpButton = fal
   }
 
   return (
-    <form onSubmit={handleDeepDive} className="w-full">
+    <form onSubmit={handleSubmit} className="w-full">
       <div className="space-y-4">
         <div className="relative">
           <SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -72,7 +72,7 @@ export default function SearchForm({ initialQuery = "", showFollowUpButton = fal
             ) : (
               <>
                 <SearchIcon className="mr-2 h-4 w-4" />
-                Deep Dive
+                Search
               </>
             )}
           </Button>

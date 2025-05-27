@@ -78,21 +78,6 @@ export default function QueryInput({
               disabled={isLoading}
             />
           </div>
-          {/* Deep Dive Button */}
-          <button
-            type="button"
-            onClick={(e) => handleSubmit(e, false)}
-            // disabled={isLoading || !query.trim() || query.trim().length < 10}
-            className={cn(
-              "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
-              "bg-zinc-700 text-white hover:bg-zinc-600 disabled:opacity-50 disabled:cursor-not-allowed",
-              "border border-zinc-600"
-            )}
-          >
-            <PerplexityIcon className="h-4 w-4" />
-            <span>Deep Dive</span>
-          </button>
-
           {/* Send Button */}
           <button
             type="submit"
@@ -113,40 +98,19 @@ export default function QueryInput({
         </div>
       ) : (
         <div className="relative bg-zinc-800 rounded-xl px-4 py-4 shadow-lg">
-          {/* Input Field */}
-          <div className="relative mb-3">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-transparent text-white py-3 px-2 outline-none placeholder-zinc-400 text-lg"
-              placeholder="Enter food, ingredient, or gut health question..."
-              disabled={isLoading}
-              aria-label="Search query"
-            />
-            {!isQueryValid && query.length > 0 && (
-              <p className="text-xs text-zinc-400 mt-1">Query must be at least 10 characters long</p>
-            )}
-          </div>
-
-          <div className="flex items-center justify-between">
-            {/* Deep Dive Button */}
-            <button
-              type="button"
-              onClick={(e) => handleSubmit(e, false)}
-              disabled={isLoading || !isQueryValid}
-              className={cn(
-                "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors border",
-                isQueryValid && !isLoading
-                  ? "bg-zinc-700 text-white hover:bg-zinc-600 border-zinc-600"
-                  : "bg-zinc-800 text-zinc-500 border-zinc-700 cursor-not-allowed",
-              )}
-              aria-label="Deep Dive"
-            >
-              <PerplexityIcon className="h-4 w-4" />
-              <span>Deep Dive</span>
-            </button>
-
+          {/* Flex container for Input and Button */}
+          <div className="flex items-center mb-2">
+            <div className="relative flex-grow">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full bg-transparent text-white py-3 px-2 outline-none placeholder-zinc-400 text-lg"
+                placeholder="Enter food, ingredient, or gut health question..."
+                disabled={isLoading}
+                aria-label="Search query"
+              />
+            </div>
             {/* Send Button */}
             <button
               type="submit"
@@ -169,6 +133,11 @@ export default function QueryInput({
               )}
             </button>
           </div>
+
+          {/* Validation Message */}
+          {!isQueryValid && query.length > 0 && (
+            <p className="text-xs text-zinc-400 mt-1">Query must be at least 10 characters long</p>
+          )}
         </div>
       )}
     </form>

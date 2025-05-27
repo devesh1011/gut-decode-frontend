@@ -136,7 +136,7 @@ export default function AboutPage() {
                 Data Sources
               </h2>
               <p>
-                Microbiome Mentor queries information from various scientific
+                Gut Decode queries information from various scientific
                 and medical sources, including but not limited to:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
